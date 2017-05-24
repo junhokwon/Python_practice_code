@@ -6,21 +6,37 @@ story = '''Born to the prestigious Crownguards, the paragon family of Demacian s
 As one of the youngest women to be tested by the College of Magic, she was discovered to possess a unique command over the powers of light. The young Lux viewed this as a great gift, something for her to embrace and use in the name of good. Realizing her unique skills, the Demacian military recruited and trained her in covert operations. She quickly became renowned for her daring achievements; the most dangerous of which found her deep in the chambers of the Noxian High Command. She extracted valuable inside information about the Noxus-Ionian conflict, earning her great favor with Demacians and Ionians alike. However, reconnaissance and surveillance was not for her. A light of her people, Lux's true calling was the League of Legends, where she could follow in her brother's footsteps and unleash her gifts as an inspiration for all of Demacia.'''
 
 # (1) {m}패턴지정자를 사용해서 a로 시작하는 4글자 단어를 전부 찾는다.
-print(re.findall('\sa\w{3}\s',story))
+
+#print(re.findall('\sa\w{3}\s',story))
 
 
 # (2) r로 끝나는 모든 단어를 찾는다.
-print(re.findall('\w*r\s',story))
+#print(re.findall('\w*r\s',story))
 
 # (3) a,b,c,d,e중 아무 문자나 3번 연속으로 들어간 단어를 찾는다.
 # ex) b[eca]me
-print(re.findall('\w*[a-e]{3}\w*',story))
+#print(re.findall('\w*[a-e]{3}\w*',story))
 
 
 # (4) re.sub를 사용해서 ,로 구분된 앞/뒤 단어에 대해 앞단어는 대문자화 시키고, 뒷단어는 대괄호로 감싼다.
 # 이 과정에서, 각각의 앞/뒤에 before, after그룹 이름을 사용한다.
 
-# (?P<before>\w*,\s),(?P<after>\s,\w*\s)
-# print(re.sub(r'(?P<before>\w*,\s)',(r'(?P<before>\w*,\s)'.upper(),story))
-# print(re.sub(r'(?P<after>\s,\w*\s)',(r'(?P<after>\s,\w*\s)'.lower(),story))
+
+p = re.compile(r'(?P<before>\w+)(?P<center>,\s*)(?P<after>\w+)')
+
+
+result = re.sub(p, '{}, [{}]'.format('\g<before>', '\g<after>'),story)
+
+# '\g<name>'는 <name>명의 컴파일된 파일을 그룹화 해주는 함수이다.
+
+# 람다함수로 표현
+result = re.sub(p,lambda m : '{}','[{}]'.format(m.group(1).upper(),m.group(3)),story)
+result = re.sub(p, lambda m : '{}, [{}]'.format(m.group('before').upper(),m.group('after')),story)
+
+print(result)
+
+
+
+
+
 
