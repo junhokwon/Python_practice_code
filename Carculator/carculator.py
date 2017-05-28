@@ -14,8 +14,12 @@ def start():
     while True:
         choice = int(input('1.더하기 2.빼기 3. 곱하기 4. 나누기 5. 나머지구하기 6. 나가기 '))
         if (choice <=5):
-            numberA = int(input("첫번째 숫자를 입력하시오 : "))
-            numberB = int(input("두번째 숫자를 입력하시오 : "))
+            num_list = (input('숫자를 입력해주세요 : ex) 13 45 : '))
+            num_split = num_list.split()
+            numberA = int(num_split[0])
+            numberB = int(num_split[1])
+            # numberA = int(input('첫번째 숫자를 입력하세요 : ')
+            # numberB = int(input('두번째 숫자를 입력하세요 : ')
             if(choice == 1):
                 result = sum(numberA,numberB)
                 print(result)
