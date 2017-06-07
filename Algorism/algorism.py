@@ -180,3 +180,92 @@ def sum_digit(number):
 #number =123일경우 , 123 % 10 = 3, sum_digit(함수로다시리턴) : 123 // 10 : 12 - 12 리턴값
 # 12 리턴값 : 12%10 = 2, 12//10 = 1 (2+1) = 3
 # 즉 3(123%10) + 3 (12리턴값) = 6
+
+# (8) strToInt 메소드는 String형 str을 매개변수로 받습니다.
+# str을 숫자로 변환한 결과를 반환하도록 strToInt를 완성하세요.
+# 예를들어 str이 "1234"이면 1234를 반환하고, "-1234"이면 -1234를 반환하면 됩니다.
+# str은 부호(+,-)와 숫자로만 구성되어 있고, 잘못된 값이 입력되는 경우는 없습니다.
+
+def strToInt(str):
+    result = 0
+    result = int(str)
+
+    return result
+#
+# (9) water_melon함수는 정수 n을 매개변수로 입력받습니다.
+# 길이가 n이고, 수박수박수...와 같은 패턴을 유지하는 문자열을 리턴하도록 함수를 완성하세요.
+#
+# 예를들어 n이 4이면 '수박수박'을 리턴하고 3이라면 '수박수'를 리턴하면 됩니다.
+
+def water_melon(n):
+    return ("수박"*n)[:-n]
+
+# 튜플도 인덱싱과 슬라이싱이 가능하다. t =(1,5,10)
+# 인덱스 : 리스트와 마찬가지로 한 요소를 리턴하는 인덱싱 second =t[1] =5 , last =t[-1] = 10 ,
+# 슬라이싱 : 특정 부분집합을 리턴하는 슬라이싱 s =t[1:2] = 5(t[index]) , s=t[1:] : 5,10
+
+# (10) findKim 함수(메소드)는 String형 배열 seoul을 매개변수로 받습니다.
+#
+# seoul의 element중 "Kim"의 위치 x를 찾아, "김서방은 x에 있다"는 String을 반환하세요.
+# seoul에 "Kim"은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.
+
+def findKim(seoul):
+    return "김서방은 {}에 있다.".format(seoul.index("Kim"))
+
+def findKim(seoul):
+    kimIdx = 0
+
+    for kimIdx in range(len(seoul)):
+        if(seoul[kimIdx] == "Kim"):
+            break
+        return "김서방은 {}에 있다.".format(kimIdx)
+
+def findKim(seoul):
+    kimIdx = 0
+    for index,i in enumerate(seoul):
+        if i == "Kim":
+            kimIdx = index
+    return "김서방은 {}에 있다.".format(kimIdx)
+
+# (11) printTriangle 메소드는 양의 정수 num을 매개변수로 입력받습니다.
+# 다음을 참고해 *(별)로 높이가 num인 삼각형을 문자열로 리턴하는 printTriangle 메소드를 완성하세요
+# printTriangle이 return하는 String은 개행문자('\n')로 끝나야 합니다.
+
+def printTriangle(num):
+    s = ""
+    for i in range(1,num+1):#(1이상 num+1미만)
+        s += "*"*i + "\n" # 문자열을 쓸때는 "" 큰쌍따음표를 사용한다.
+    return s
+
+def printTriangle(num):
+    return ''.join(["*"*i + "\n" for i in range(1,num+1)])
+
+
+# (12)alpha_string46함수는 문자열 s를 매개변수로 입력받습니다.
+# s의 길이가 4혹은 6이고, 숫자로만 구성되있는지 확인해주는 함수를 완성하세요.
+# 예를들어 s가 "a234"이면 False를 리턴하고 "1234"라면 True를 리턴하면 됩니다
+# try - except구문을 활용하여 값이 숫자가아닌문자가 들어있으면 valueError를 발생시킨다.
+
+def alpha_string46(s):
+    try:
+        if ((len(s) == 4 or len(s) == 6 ) and int(s)):
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
+
+# isdigit()는 숫자여부를 파악하며 모든 문자가 0에서 9까지의 숫자이면 True반, 리턴 : True,False
+
+def alpha_string46(s):
+    return s.isdigit() and len(s) in [4,6]
+
+# 정규표현식으로 해결하기 import re
+
+def alpha_string46(s):
+    import re
+    return bool(re.match("^(\d{4}|\d{6})$"),s)
+# bool 값은 true/false로 리턴
+# re.match(문자열패턴(정규표현식),문자열)
+# (\d{4} | \d{6} ) : 숫자가 4회 또는(|) 숫자가 6회
+
