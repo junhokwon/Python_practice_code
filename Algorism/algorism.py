@@ -269,3 +269,172 @@ def alpha_string46(s):
 # re.match(문자열패턴(정규표현식),문자열)
 # (\d{4} | \d{6} ) : 숫자가 4회 또는(|) 숫자가 6회
 
+# (13) numPY함수는 대문자와 소문자가 섞여있는 문자열 s를 매개변수로 입력받습니다.
+# s에 'p'의 개수와 'y'의 개수를 비교해 같으면 True, 다르면 False를 리턴하도록 함수를 완성하세요. 'p', 'y' 모두 하나도 없는 경우는 항상 True를 리턴합니다.
+# 예를들어 s가 "pPoooyY"면 True를 리턴하고 "Pyy"라면 False를 리턴합니다.
+
+def numPY(s):
+    if s.lower().count('p') == s.lower().count('y'):
+        return True
+    else:
+        return False
+
+# (14) strange_sort함수는 strings와 n이라는 매개변수를 받아들입니다.
+# strings는 문자열로 구성된 리스트인데, 각 문자열을 인덱스 n인 글자를 기준으로 정렬하면 됩니다.
+#
+# 예를들어 strings가 ["sun", "bed", "car"]이고 n이 1이면 각 단어의 인덱스 1인 문자 u, e ,a를 기준으로 정렬해야 하므로 결과는 ["car", "bed", "sun"]이 됩니다.
+# strange_sort함수를 완성해 보세요.
+
+def strange_sort(strings,n):
+    return sorted(strings,key=lambda stirngs:strings[n])
+
+# sorted(문자열,key) 입력한 값을 정렬하고, 결과값을 list로 출력해주는 함수, 정렬후 ->list출력
+# 딕셔너리 {}에 있는 key값은 strings:strings[n]기준을 세우는것인데 , strings를 불러와서
+# strings의 [n]번째 기준으로 하겠다.
+
+# 제곱수가 가장 작은 순서대로 정렬하고 싶다면, a = [ -1, -8, 3, -4, 2, 5, -7]일때
+# a.sorted(key=lambda 매개변수 x : x*x(표현식),reverse=True)
+
+# (15) 딕셔너리는 들어있는 값에 순서가 없지만, 키를 기준으로 정렬하고 싶습니다. 그래서 키와 값을 튜플로 구성하고, 이를 순서대로 리스트에 넣으려고 합니다.
+# 예를들어 {"김철수":78, "이하나":97, "정진원":88}이 있다면 각각의 키와 값을
+#
+# ("김철수", 78)
+# ("이하나", 97)
+# ("정진원", 88)
+# 과 같이 튜플로 분리하고 키를 기준으로 정렬해서 다음과 같은 리스트를 만들면 됩니다.
+# [ ("김철수", 78), ("이하나", 97), ("정진원", 88) ]
+#
+# 다음 sort_dictionary 함수를 완성해 보세요.
+
+def sort_dictionary(dic):
+    return sorted(tuple(dic.items()))
+
+def sort_dictionary(dic):
+    return sorted(dic.items(),key=lambda x : x[0])
+
+# x[0] : 키 x[1] : 값 (key=lambda 매개변수 x : x*x(표현식)
+
+# (16) no_continuous함수는 스트링 s를 매개변수로 입력받습니다.
+#
+# s의 글자들의 순서를 유지하면서, 글자들 중 연속적으로 나타나는 아이템은 제거된 배열(파이썬은 list)을 리턴하도록 함수를 완성하세요.
+# 예를들어 다음과 같이 동작하면 됩니다.
+#
+# s가 '133303'이라면 ['1', '3', '0', '3']를 리턴
+# s가 '47330'이라면 [4, 7, 3, 0]을 리턴
+# (1) 순서를 유지하면서(list는 순서가 있다.) , (2) 중복된 요소를 제거해야하 한다.
+
+def no_continuous(s):
+    a = []
+    for i in s:
+        if a[-1:] == [i]:
+            continue
+        a.append(i)
+        return a
+        # 리스트에 요소추가할경우 , append를 사용한다 append(x) : 마지막에 x를 추가하는 함수
+
+
+def no_continuous(s):
+    result = []
+    for idx,num in enumerate(s):
+        if idx == 0:
+            result.append(num)
+        else:
+            if num == result[-1]:
+                # 맨마지막의 리스트의 index[-1] 값이 숫자와 같으면 계속 continue
+                # else: 그렇지않다면, num을 계속 추가해줘라.
+                continue
+            else:
+                result.append(num)
+        return result
+
+# (17) getMiddle메소드는 하나의 단어를 입력 받습니다. 단어를 입력 받아서 가운데 글자를 반환하도록 getMiddle메소드를 만들어 보세요. 단어의 길이가 짝수일경우 가운데 두글자를 반환하면 됩니다.
+# 예를들어 입력받은 단어가 power이라면 w를 반환하면 되고, 입력받은 단어가 test라면 es를 반환하면 됩니다.
+
+def string_middle(str):
+    if len(str) % 2 == 1:
+        return str[len(str)//2]
+    else:
+        return str[len(str)//2 -1 : len(str)//2 + 1]
+
+# (18) 두 수를 입력받아 두 수의 최대공약수와 최소공배수를 반환해주는
+# gcdlcm 함수를 완성해 보세요. 배열의 맨 앞에 최대공약수, 그 다음 최소공배수를 넣어 반환하면 됩니다. 예를 들어 gcdlcm(3,12) 가 입력되면, [3, 12]를 반환해주면 됩니다.
+# 최대 공약수는 12와 18이 있을때 18을 12로 나눈 나머지 6
+# 12를 6으로 나눈 나머지 0
+# 그러므로 최대 공약수는 6, 최소공배수는 두수의 곱을 최대 공약수로 나눠주기만 하면 된다.
+
+def gcdlcm(a,b):
+    c,d = max(a,b), min(a,b)
+    t = 1
+    while t >0:
+        t = c % d
+        c,d = d,t
+    answer = [c, int(a*b/c)]
+
+    return answer
+
+def gcdlcm(a,b):
+    if a<b:
+        (a,b) = (b,a)
+    while b!=0:
+        (a,b) = (b, a%b)
+        (c,d) = (a,b)
+    answer = [c, int(a*b/c]
+
+
+def gcdlcm(a,b):
+        c,d = max(a,b),min(a,b)
+        t = 1
+        while t>0:
+            t = c%d
+            (a,b) = (b,a%b)
+            (c,d) = (a,b)
+        answer = [c,int(a*b/c)]
+
+
+# (19) 행렬의 덧셈은 행과 열의 크기가 같은
+# 두 행렬의 같은 행, 같은 열의 값을 서로 더한 결과가 됩니다.
+# 2개의 행렬을 입력받는 sumMatrix 함수를 완성하여
+# 행렬 덧셈의 결과를 반환해 주세요.
+# 예를 들어 2x2 행렬인
+# A = ((1, 2), (2, 3)), B = ((3, 4), (5, 6)) 가 주어지면,
+# 같은 2x2 행렬인 ((4, 6), (7, 9))를 반환하면 됩니다.
+# 예를들면 A[0] = [1,2]이고 , A[0]=C, C[0] =1
+# A[0] =[1,2]
+# A[0] =C
+# C[0] =1
+# A[0][0] =1 , B[0][0] =3
+# A[0][0] + B[0][0] = 4
+
+def sumMatrix(A,B):
+    answer = []
+    for i range(len(A)):
+        temp=[]
+        for j in range(len(A[0])):
+            temp.append(A[i][j] + B[i][j])
+        answer.append(temp)
+    return answer
+
+# len(A) : 리스트안에 리스트가 있고,
+# 정방행렬이므로 len(A): 전체길이는 2이다. 전체길이가 2이라는 것은
+# (0,1) 2가지의 인덱스값이 들어간다.
+# for i range(len(A)):
+# 일단 temp라는 빈 리스트를 만들어준다. 밖의 리스트를 의미(리스트안에 리스트가 있기 때문에)
+# i까지의 의미는 A=[[1,2],[2,3]]에서 [1,2]앞의 것만 꺼낸것을 의미
+# len(A[0]= [1,2]에서 j인덱스의 j[0],j[1]값을 할당해줘야 한다. 그러므로
+# for문에 for문을 돌려야 한다.
+# for j in range(len(A[0])):
+# 정방행렬의 경우 더할때는 자릿값이 일치하므로,
+# temp 빈리스트에 넣어준다. ex) A[i][j] + B[i][j]에서 A,B에서 i값과 j값이 같기 떄문에
+# 자릿값이 일치한대로 값을 더해줄 수 있다.
+# 경우의수
+# A00 + B00/A01 + B01/ A10+B10/ A11 +B11
+# i[0]일경우 j의 인덱스는 j[0],j[1]이 되기 때문에
+# for문을 2번돌린 결과는 A00+B00/A01+B01 값이 2개 산출된다.
+# temp빈리스트에 일단 [4,6],[7,9]가 오면
+# answer이라는 빈리스트에 또 추가하여 리스트를 감싸준다.
+# [[4,6],[7,9]]
+
+
+
+
+

@@ -7,6 +7,17 @@ class Bus:
         self.time = time
         self.distance = distance
 
+        @property
+        # 읽기전용
+        def price(self):
+            return self.__price
+
+        @price.setter
+        # 쓰기전용
+        def price(self, new_price):
+            self.__price = new_price
+            print('set new price : ({}원)'.format(self.__price))
+
     def info(self):
         print('{}버스의 이동비용은 {}원이고, 시간은 {}시간 걸리고, 이동거리는 {}km 이다'.format(self.name, self.__price, self.time, self.distance))
 
@@ -22,13 +33,3 @@ class Bus:
         self.next_bus = next_bus
         print('{}버스와 {}버스의 총 이동시간은 {}시간입니다'.format(self.name,self.next_bus.name,self.time + self.next_bus.time))
 
-    @property
-    # 읽기전용
-    def price(self):
-        return self.__price
-
-    @price.setter
-    # 쓰기전용
-    def price(self, new_price):
-        self.__price = new_price
-        print('set new price : ({}원)'.format(self.__price))
